@@ -21,9 +21,9 @@ abstract class Model
     {
         if (self::$db=== null) {
             try {
-                self::$db = new PDO('mysql:host=localhost;dbname=grp-436_s3_progweb',
-                    'grp-436',
-                    'pkzhwAcr'
+                self::$db = new PDO('mysql:host=localhost;dbname=pokemon',
+                    'root',
+                    ''
                     , array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
             }
             catch (PDOException $e) {
