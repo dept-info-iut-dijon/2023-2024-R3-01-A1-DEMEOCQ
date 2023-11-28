@@ -1,0 +1,83 @@
+* {
+    scroll-behavior: smooth;
+}
+body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    background: white;
+    font-family: 'Segoe UI', "Arial", sans-serif;
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+section {
+    margin: 0;
+    padding: 30px 20%;
+}
+
+section .section-title {
+    margin: 25px auto 10px;
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    color: #3560ab;
+}
+
+.styled-tab{
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-tab tr:first-child th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.styled-tab tr:first-child th:last-child {
+    border-top-right-radius: 8px;
+}
+
+.styled-tab thead tr{
+    margin-bottom: 5px;
+    background-color: #cc2026;
+    color: white;
+    text-align: left;
+}
+
+.styled-tab thead tr th{
+    color: white;
+    background-color: #cc2026;
+    font-weight: bold;
+}
+
+.styled-tab th,
+.styled-tab td{
+    padding: 12px 15px;
+}
+
+.styled-tab tbody tr{
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-tab tbody tr:nth-of-type(even){
+    background-color: #f3f3f3;
+}
+
+.styled-tab tbody tr:last-of-type {
+    border-bottom: 2px solid #cc2026;
+}
+
+.styled-tab .tabImgPok{
+    width: 150px;
+    height: 150px;
+}
+
+.styled-tab .tabImgPok img{
+    max-width: 100%;
+    height: auto;
+}
