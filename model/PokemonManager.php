@@ -1,6 +1,8 @@
 <?php
 
 namespace model;
+require_once("model/Model.php");
+require_once("model/Pokemon.php");
 
 class PokemonManager extends Model
 {
@@ -19,7 +21,7 @@ class PokemonManager extends Model
 
     public function getById(int $idPokemon) : ?Pokemon
     {
-        $result = $this->execRequest("SELECT * FROM INFOS_OFFRES WHERE idPokemon=?", array($idPokemon))->fetch();
+        $result = $this->execRequest("SELECT * FROM POKEMON WHERE idPokemon=?", array($idPokemon))->fetch();
         if ($result != false){
             $pok = new Pokemon();
             $pok->hydrate($result);
