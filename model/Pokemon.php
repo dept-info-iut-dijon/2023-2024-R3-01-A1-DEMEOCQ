@@ -14,7 +14,7 @@ class Pokemon
 
     private ?string $typeTwo;
 
-    private ?string $urlImage;
+    private ?string $urlImg;
 
     /**
      * @return int|null l'id dans la BDD du Pokemon
@@ -104,18 +104,18 @@ class Pokemon
     /**
      * @return string|null url de l'image
      */
-    public function getUrlImage(): ?string
+    public function getUrlImg(): ?string
     {
-        return $this->urlImage;
+        return $this->urlImg;
     }
 
     /**
      * @param string|null $urlImage url de l'image
      * @return void
      */
-    public function setUrlImage(?string $urlImage): void
+    public function setUrlImg(?string $urlImg): void
     {
-        $this->urlImage = $urlImage;
+        $this->urlImg = $urlImg;
     }
 
     /**
