@@ -13,7 +13,6 @@ class MainController
         $indexView = new View('Index');
         $pokManager = new PokemonManager();
         $allPok = $pokManager->getAll();
-
         $indexView->generer(['nomDresseur' => "Red", 'listPokemon' => $allPok]);
     }
 
