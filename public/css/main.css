@@ -1,3 +1,16 @@
+/* --------- Définition des variables CSS --------- */
+:root {
+    --primary-color: #cc2026;
+    --secondary-color: #171616;
+    --success-color: #2ca02c;
+    --danger-color: #ffe400;
+    --bg-color: #f8fffd;
+    --transition: all 0.2s ease-in-out;
+    --shadow: 0 0 10px rgba(50, 50, 75, 0.1);
+}
+
+
+/* --------- Styles généraux --------- */
 * {
     scroll-behavior: smooth;
 }
@@ -5,16 +18,89 @@ body {
     position: relative;
     margin: 0;
     padding: 0;
-    background: white;
+    background: var(--bg-color);
     font-family: 'Segoe UI', "Arial", sans-serif;
     box-sizing: border-box;
     max-width: 100%;
 }
-
 h1, h2, h3, h4, h5, h6 {
     font-family: "Segoe UI", "Arial", sans-serif;
 }
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--primary-color);
+    text-decoration: none;
+    color: var(--bg-color);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+.btn-primary {
+    background-color: var(--primary-color);
+}
+.btn-success {
+    background-color: var(--success-color);
+}
+.btn-danger {
+    background-color: var(--danger-color);
+}
+.btn:hover {
+    filter: brightness(.8);
+}
 
+/* ---------{ Définition des variables CSS }--------- */
+header {
+    margin: 0;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-color);
+    position: sticky;
+    top: 0;
+    box-shadow: var(--shadow);
+}
+header .logo {
+    padding: 5px;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.5rem;
+}
+header .logo img {
+    height: 100%;
+}
+header nav ul {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    background-color: var(--primary-color);
+    padding: 0;
+    border-radius: 8px;
+}
+header nav ul li {
+    padding: 20px 30px;
+}
+header nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    transition: var(--transition);
+}
+header nav ul li:hover a{
+    color: var(--secondary-color);
+}
+header nav ul li:hover {
+    background-color: var(--bg-color);
+    transition: var(--transition);
+}
+
+
+/* --------- Styles du tableau de Pokemon --------- */
 section {
     margin: 0;
     padding: 30px 20%;
@@ -25,7 +111,6 @@ section .section-title {
     font-size: 30px;
     font-weight: 700;
     text-align: center;
-    color: #3560ab;
 }
 
 .styled-tab{
@@ -80,4 +165,13 @@ section .section-title {
 .styled-tab .tabImgPok img{
     max-width: 100%;
     height: auto;
+}
+
+.styled-tab .actions {
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
 }

@@ -7,13 +7,21 @@ require_once("model/PokemonManager.php");
 use model\PokemonManager;
 use views\View;
 
+/**
+ * Class MainController
+ * Controleur principal
+ */
 class MainController
 {
     public function Index() : void {
-        $indexView = new View('Index');
+        // création du manager de Pokemon
         $pokManager = new PokemonManager();
+        // récupère la liste des Pokemon
         $allPok = $pokManager->getAll();
-        $indexView->generer(['nomDresseur' => "Red", 'listPokemon' => $allPok]);
+
+        $indexView = new View('Index');
+        $indexView->generer(['listPokemon' => $allPok]);
+
     }
 
 }
