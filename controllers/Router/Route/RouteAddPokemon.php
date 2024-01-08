@@ -37,6 +37,8 @@ class RouteAddPokemon extends Route
      * @param array $params Paramètres à passer à l'exécution
      * @return void
      */
-    protected function post(array $params = [])
-    {    }
+    protected function post(array $params = []): void
+    {
+        $this->controller->addPokemon($params);
+    }
 }
