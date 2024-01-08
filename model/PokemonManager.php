@@ -4,6 +4,9 @@ namespace model;
 require_once("model/Model.php");
 require_once("model/Pokemon.php");
 
+/**
+ * Manager Pokemon
+ */
 class PokemonManager extends Model
 {
 
@@ -31,6 +34,17 @@ class PokemonManager extends Model
 
         // retourne le pokémon créé à l'instant
         return $res;
+    }
+
+    /**
+     * @param int $idPokemon
+     * @return int
+     */
+    public function deletePokemon(int $idPokemon = -1): int
+    {
+        $sql = "DELETE FROM pokemon WHERE idPokemon = ?";
+        $params = [$idPokemon];
+        return $this->execRequest($sql, $params)->rowCount();
     }
 
     public function getAll() : array

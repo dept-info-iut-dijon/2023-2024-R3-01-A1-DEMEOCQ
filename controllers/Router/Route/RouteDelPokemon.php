@@ -7,6 +7,7 @@ require_once('controllers/PokemonController.php');
 
 use controllers\Router\Route;
 use controllers\PokemonController;
+use Exception;
 
 /**
  * Class RouteDelPokemon
@@ -33,7 +34,11 @@ class RouteDelPokemon extends Route
      */
     protected function get(array $params = []): void
     {
-        $idPokemon = $params['idPokemon'];
+        if (!empty($params['idPokemon']) and is_numeric($params['idPokemon']))
+            $idPokemon = $params['idPokemon'];
+        else
+            throw new Exception("Identifiant de pokémon invalide");
+
         $this->controller->delPokemon($idPokemon);
     }
 
