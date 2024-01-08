@@ -1,5 +1,5 @@
 <div class="containerForm">
-    <form action="" method="POST">
+    <form action="/index.php?action=add-pokemon" method="post">
         <div class="form-group">
             <label for="nomEspece">Nom de l'espèce</label>
             <input type="text" name="nomEspece" id="nomEspece" class="form-control" required>
