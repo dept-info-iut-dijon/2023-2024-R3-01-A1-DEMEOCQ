@@ -42,5 +42,18 @@ class RouteSearch extends Route
      * @return void
      */
     protected function post(array $params = []): void
-    {    }
+    {
+        try {
+            $data = [
+                'recherche' => $this->getParam($params, 'recherche', false),
+                'champ' => $this->getParam($params, 'champ', false)
+            ];
+        }
+        catch (\Exception $e) {
+            $this->controller->Exception(["error" => $e->getMessage()]);
+            return;
+        }
+
+        $this->controller->Search($data);
+    }
 }

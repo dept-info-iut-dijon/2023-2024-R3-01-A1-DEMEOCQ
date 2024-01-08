@@ -32,8 +32,6 @@ class PokemonManager extends Model
             $pokemon->setIdPokemon($idPokemon);
             $res = $pokemon;
         }
-
-        // retourne le pokémon créé à l'instant
         return $res;
     }
 
@@ -70,7 +68,6 @@ class PokemonManager extends Model
     public function editPokemon(array $dataPokemon): bool
     {
         $res = false;
-
         if($dataPokemon["typeTwo"] === $dataPokemon["typeOne"]) $dataPokemon["typeTwo"] = null;
 
         $sql = "UPDATE pokemon SET nomEspece = ?, description = ?, typeOne = ?, typeTwo = ?, urlImg = ? WHERE idPokemon = ?;";
@@ -83,7 +80,6 @@ class PokemonManager extends Model
             $dataPokemon["idPokemon"]
         ])) $res = true;
 
-        // retourne le pokémon modifié à l'instant
         return $res;
     }
 
@@ -97,5 +93,28 @@ class PokemonManager extends Model
         else $pok = null;
 
         return $pok;
+    }
+
+    public function searchPokemons(array $params): array
+    {
+        $sql = match ($params['champ']) {
+            'idPokemon' => "SELECT * FROM pokemon WHERE idPokemon LIKE ?",
+            'nomEspece' => "SELECT * FROM pokemon WHERE nomEspece LIKE ?",
+            'typeOne' => "SELECT * FROM pokemon WHERE typeOne LIKE ?",
+            'typeTwo' => "SELECT * FROM pokemon WHERE typeTwo LIKE ?",
+            'urlImg' => "SELECT * FROM pokemon WHERE urlImg LIKE ?",
+            default => "SELECT * FROM pokemon WHERE description LIKE ?",
+        };
+        $params = ["%".$params["recherche"]."%"];
+        $stmt = $this->execRequest($sql, $params);
+        $res = $stmt->fetchAll();
+
+        $pokemon_array= [];
+        foreach($res as $pokemon){
+            $pokemon_object = new Pokemon();
+            $pokemon_object->hydrate($pokemon);
+            $pokemon_array[] = $pokemon_object;
+        }
+        return $pokemon_array;
     }
 }
