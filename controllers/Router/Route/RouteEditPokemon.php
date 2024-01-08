@@ -35,6 +35,12 @@ class RouteEditPokemon extends Route
     {
         $idPokemon = $params['idPokemon'];
         $this->controller->displayEditPokemon($idPokemon);
+        if (!empty($params['idPokemon']) and is_numeric($params['idPokemon'])) {
+            $idPokemon = $params['idPokemon'];
+            $this->controller->displayEditPokemon($idPokemon);
+        }
+        else
+            $this->controller->displayAddPokemon("Identifiant de pokémon invalide");
     }
 
     /**
