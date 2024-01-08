@@ -10,6 +10,7 @@ require_once('controllers/Router/Route/RouteAddType.php');
 require_once('controllers/Router/Route/RouteSearch.php');
 require_once('controllers/Router/Route/RouteDelPokemon.php');
 require_once('controllers/Router/Route/RouteEditPokemon.php');
+require_once('controllers/Router/Route/RouteException.php');
 
 use controllers\MainController;
 use controllers\PokemonController;
@@ -19,6 +20,7 @@ use controllers\Router\Route\RouteAddType;
 use controllers\Router\Route\RouteSearch;
 use controllers\Router\Route\RouteDelPokemon;
 use controllers\Router\Route\RouteEditPokemon;
+use controllers\Router\Route\RouteException;
 
 /**
  * Classe Routeur
@@ -57,7 +59,8 @@ class Routeur
             "add-pokemon-type" => new RouteAddType($this->ctrlList["pokemon"]),
             "search" => new RouteSearch($this->ctrlList["main"]),
             "del-pokemon" => new RouteDelPokemon($this->ctrlList["pokemon"]),
-            "edit-pokemon" => new RouteEditPokemon($this->ctrlList["pokemon"])
+            "edit-pokemon" => new RouteEditPokemon($this->ctrlList["pokemon"]),
+            "exception" => new RouteException($this->ctrlList["main"])
         ];
     }
 
@@ -70,10 +73,19 @@ class Routeur
     public function routing(array $get = [], array $post = []): void
     {
         $action = $get[$this->action_key] ?? $post[$this->action_key] ?? "index";
-        if ($post === []) {
-            $this->routeList[$action]->action($get);
-        } else {
-            $this->routeList[$action]->action($post, 'POST');
+        try {
+            if ($post === []) {
+                $this->routeList[$action]->action($get);
+            }
+            else {
+                $this->routeList[$action]->action($post, 'POST');
+            }
+        }
+        catch (\Exception $e)
+        {
+            http_response_code(404);
+            $get["error"] = $e->getMessage();
+            $this->routeList["exception"]->action($get);
         }
     }
 }

@@ -67,6 +67,9 @@
             <label for="image">Image</label>
             <input type="file" name="image" id="image" class="form-control"<?php if (!empty($pokemon)) echo " value='{$pokemon->getUrlImg()}'"; ?> required>
         </div>
+        <?php if (!empty($pokemon)) : ?>
+            <input type="hidden" id="idPokemon" name="idPokemon" value="<?= $pokemon->getIdPokemon() ?>">
+        <?php endif ?>
         <div class="form-group">
             <input type="submit" class="btn btn-primary" id="addPokemon" name="addPokemon" value="Ajouter le pokémon">
         </div>
