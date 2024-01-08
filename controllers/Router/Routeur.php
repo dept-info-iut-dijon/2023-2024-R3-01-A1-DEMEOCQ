@@ -8,6 +8,8 @@ require_once('controllers/Router/Route/RouteAddPokemon.php');
 require_once('controllers/Router/Route/RouteIndex.php');
 require_once('controllers/Router/Route/RouteAddType.php');
 require_once('controllers/Router/Route/RouteSearch.php');
+require_once('controllers/Router/Route/RouteDelPokemon.php');
+require_once('controllers/Router/Route/RouteEditPokemon.php');
 
 use controllers\MainController;
 use controllers\PokemonController;
@@ -15,6 +17,8 @@ use controllers\Router\Route\RouteAddPokemon;
 use controllers\Router\Route\RouteIndex;
 use controllers\Router\Route\RouteAddType;
 use controllers\Router\Route\RouteSearch;
+use controllers\Router\Route\RouteDelPokemon;
+use controllers\Router\Route\RouteEditPokemon;
 
 /**
  * Classe Routeur
@@ -51,7 +55,9 @@ class Routeur
             "index" => new RouteIndex($this->ctrlList["main"]),
             "add-pokemon" => new RouteAddPokemon($this->ctrlList["pokemon"]),
             "add-pokemon-type" => new RouteAddType($this->ctrlList["pokemon"]),
-            "search" => new RouteSearch($this->ctrlList["main"])
+            "search" => new RouteSearch($this->ctrlList["main"]),
+            "del-pokemon" => new RouteDelPokemon($this->ctrlList["pokemon"]),
+            "edit-pokemon" => new RouteEditPokemon($this->ctrlList["pokemon"])
         ];
     }
 
