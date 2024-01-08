@@ -1,7 +1,5 @@
 <section class="section_title">
-    <?php if (!empty($message)): ?>
-        <div class="notif notif-<?= $msgType ?>"><?= $message ?></div>
-    <?php endif ?>
+    <?php include('message.php'); ?>
     <h1>Pokémons</h1>
     <article>
         <table class="styled-tab">

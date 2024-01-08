@@ -1,10 +1,6 @@
-<?php if (!empty($message)): ?>
-    <div class="pop-up notif-danger" role="alert">
-        <?= $message ?>
-    </div>
-<?php endif ?>
+<?php include('message.php'); ?>
 
-<h1><?= !empty($pokemon) ? "Modifier {$pokemon->getNomEspece()}" : 'Ajouter un pokémon' ?></h1>
+<h1><?= !empty($pokemon) ? "Modifier {$pokemon->getNomEspece()}" : 'Ajouter Pokémon' ?></h1>
 
 <div class="containerForm">
     <form action="/index.php?action=<?= !empty($pokemon) ? 'edit' : 'add' ?>-pokemon" method="post">

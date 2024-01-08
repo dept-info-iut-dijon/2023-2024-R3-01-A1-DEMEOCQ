@@ -1,4 +1,4 @@
-<h1>Erreur <?= http_response_code() ?></h1>
+<h1>Y'a erreur</h1>
 
 <div class="pop-up notif-danger">La page que vous recherchez n'existe pas.</div>
 

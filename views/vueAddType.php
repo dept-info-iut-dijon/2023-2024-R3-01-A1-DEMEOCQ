@@ -1,3 +1,4 @@
+<?php include('message.php'); ?>
 <h1>Ajout un type de Pokémon</h1>
 <div class="containerForm">
     <form action="" method="POST">

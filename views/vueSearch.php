@@ -1,5 +1,6 @@
 <h1>Recherche Pokémon</h1>
 <div class="containerForm">
+    <?php include('message.php'); ?>
     <form action="" method="POST">
         <div class="form-group">
             <label for="recherche">Rerchercher</label>

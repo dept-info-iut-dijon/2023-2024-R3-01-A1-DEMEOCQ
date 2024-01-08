@@ -2,10 +2,12 @@
 
 namespace controllers;
 
+require_once("helpers/Message.php");
 require_once("views/View.php");
 require_once("model/PokemonManager.php");
 require_once("model/Pokemon.php");
 
+use helpers\Message;
 use views\View;
 use model\PokemonManager;
 use model\Pokemon;
@@ -23,6 +25,7 @@ class PokemonController
      */
     public function displayAddPokemon(?string $message = null): void
     {
+        if($message !== null) $message = new Message($message, "Erreur", "danger");
         $addPokemonView = new View('AddPokemon');
         $addPokemonView->generer(["message" => $message]);
     }
@@ -39,10 +42,9 @@ class PokemonController
 
         if ($pokemon !== false) {
             $pokemons = $manager->getAll();
-
-            // affiche et confirme
+            $message = new Message("Le pokémon {$pokemon->getNomEspece()} a bien été ajouté", "Succès", "success");
             $indexView = new View('Index');
-            $indexView->generer(["pokemons" => $pokemons, "msgType" => "success", "message" => "Le pokémon {$pokemon->getNomEspece()} a bien été ajouté"]);
+            $indexView->generer(["pokemons" => $pokemons, "message" => $message]);
         }
         else {
             $this->displayAddPokemon("Le pokémon n'a pas pu être ajouté");
@@ -85,37 +87,38 @@ class PokemonController
     public function delPokemon(int $idPokemon): void
     {
         $manager = new PokemonManager();
-
         // suppression du pokémon
         if ($manager->deletePokemon($idPokemon) > 0) {
-            $msgType = "success";
-            $message = "Le pokémon {$idPokemon} a bien été supprimé";
+            $message = new Message("Le pokémon {$idPokemon} a bien été supprimé", "Succès", "success");
         }
         else {
-            $msgType = "danger";
-            $message = "Le pokémon {$idPokemon} n'a pas pu être supprimé";
+            $message = new Message("Le pokémon {$idPokemon} n'a pas pu être supprimé", "Erreur", "danger");
         }
 
         $pokemons = $manager->getAll();
 
         // affiche l'index avec le message
         $delPokemonView = new View('Index');
-        $delPokemonView->generer(["pokemons" => $pokemons, "msgType" => $msgType, "message" => $message]);
+        $delPokemonView->generer(["pokemons" => $pokemons, "message" => $message]);
     }
 
+
+    /**
+     * modifie un Pokemon
+     * @param array $dataPokemon
+     * @return void
+     */
     public function editPokemonAndIndex(array $dataPokemon): void
     {
         $manager = new PokemonManager();
-
         $pokemon = $manager->getById($dataPokemon['idPokemon']);
 
         if($pokemon !== null) {
             $manager->editPokemon($dataPokemon);
-
             $pokemons = $manager->getAll();
-
+            $message = new Message("Le pokémon {$pokemon->getNomEspece()} a été mis à jour", "Pokémon modifié", "success");
             $indexView = new View('Index');
-            $indexView->generer(['pokemons' => $pokemons, "msgType" => "success", "message"=> "Le pokémon {$pokemon->getNomEspece()} a été mis à jour"]);
+            $indexView->generer(['pokemons' => $pokemons, "msgType" => "success", "message"=> $message]);
         }
         else
             $this->displayAddPokemon("Le pokémon n'a pas pu être modifié");
