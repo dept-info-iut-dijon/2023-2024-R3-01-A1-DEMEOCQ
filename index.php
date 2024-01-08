@@ -1,8 +1,9 @@
 <?php
 
-require_once ("controllers\MainController.php");
+require_once ("controllers\Router\Routeur.php");
 
-use controllers\MainController;
+use controllers\Router\Routeur;
 
-$controller = new MainController();
-$controller->Index();
+// Routeur
+$routeur = new Routeur();
+$routeur->routing($_GET, $_POST);

@@ -21,12 +21,11 @@
                         <td class="tabTypesPok"><?= $pokemon->getTypeOne()." ".$pokemon->getTypeTwo() ?></td>
                         <td class="tabImgPok"><img src="<?= $pokemon->getUrlImg() ?>" alt="Un Pokemon"></td>
                         <td class="actions">
-                                <a href="/index.php?action=edit-pokemon&idPokemon=<?= $pokemon->getIdPokemon() ?>" class="btn btn-danger">Modifier</a>
-                                <a href="/index.php?action=del-pokemon&idPokemon=<?= $pokemon->getIdPokemon() ?>" class="btn btn-primary">Supprimer</a>
+                            <a href="/index.php?action=edit-pokemon&idPokemon=<?= $pokemon->getIdPokemon() ?>" class="btn btn-danger">Modifier</a>
+                            <a href="/index.php?action=del-pokemon&idPokemon=<?= $pokemon->getIdPokemon() ?>" class="btn btn-primary">Supprimer</a>
                         </td>
                     </tr>
-                <?php endforeach; ?>
-
+                <?php endforeach ?>
             </tbody>
         </table>
     </article>
