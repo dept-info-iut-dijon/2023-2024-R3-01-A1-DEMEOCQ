@@ -24,4 +24,13 @@ class MainController
 
     }
 
+    /**
+     * Affiche la page de recherche de pokémon
+     * @return void
+     */
+    public function Search(): void
+    {
+        $searchView = new View('Search');
+        $searchView->generer([]);
+    }
 }
