@@ -1,3 +1,11 @@
+<?php if (!empty($message)): ?>
+    <div class="pop-up notif-danger" role="alert">
+        <?= $message ?>
+    </div>
+<?php endif ?>
+
+<h1>Ajout de Pokemon</h1>
+
 <div class="containerForm">
     <form action="/index.php?action=add-pokemon" method="post">
         <div class="form-group">

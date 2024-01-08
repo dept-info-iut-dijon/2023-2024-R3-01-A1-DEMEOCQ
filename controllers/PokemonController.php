@@ -16,12 +16,13 @@ class PokemonController
 {
     /**
      * Affiche la page d'ajout de pokémon
+     * @param string|null $message
      * @return void
      */
-    public function displayAddPokemon(): void
+    public function displayAddPokemon(?string $message = null): void
     {
         $addPokemonView = new View('AddPokemon');
-        $addPokemonView->generer([]);
+        $addPokemonView->generer(["message" => $message]);
     }
 
     /**
@@ -36,26 +37,26 @@ class PokemonController
 
     /**
      * Affiche la page d'édition de Pokémon
-     * @param array $params Paramètres à passer à la page
+     * @param int $idPokemon
      * @return void
      */
-    public function displayEditPokemon(array $params): void
+    public function displayEditPokemon(int $idPokemon): void
     {
         $editPokemonView = new View('AddPokemon');
-        $editPokemonView->generer(["idPokemon" => $params["idPokemon"]]);
+        $editPokemonView->generer(["idPokemon" => $idPokemon]);
     }
 
     /**
      * Supprime un Pokémon
-     * @param array $params Paramètres à passer à la page
+     * @param int $idPokemon
      * @return void
      */
-    public function delPokemon(array $params): void
+    public function delPokemon(int $idPokemon): void
     {
         $manager = new PokemonManager();
         $pokemons = $manager->getAll();
 
         $delPokemonView = new View('Index');
-        $delPokemonView->generer(["pokemons" => $pokemons, "message" => "Le pokémon {$params['idPokemon']} a bien été supprimé"]);
+        $delPokemonView->generer(["pokemons" => $pokemons, "message" => "Le pokémon {$idPokemon} a bien été supprimé"]);
     }
 }
