@@ -18,6 +18,7 @@ class PokemonManager extends Model
     public function createPokemon(Pokemon $pokemon): Pokemon|false
     {
         $res = false;
+        if($pokemon->getTypeTwo() === $pokemon->getTypeOne()) $pokemon->setTypeTwo(null);
 
         $sql = "INSERT INTO pokemon (nomEspece, description, typeOne, typeTwo, urlImg) VALUES (?, ?, ?, ?, ?);";
         if($this->execRequest($sql, [
@@ -37,6 +38,7 @@ class PokemonManager extends Model
     }
 
     /**
+     * supprime le pokemon de la bdd
      * @param int $idPokemon
      * @return int
      */
@@ -58,6 +60,31 @@ class PokemonManager extends Model
             $pok_array[] = $pok_objet;
         }
         return $pok_array;
+    }
+
+    /**
+     * Modifie un pokémon en bdd
+     * @param array $dataPokemon Données du pokémon à modifier
+     * @return bool Vrai si le pokémon a été modifié, faux sinon
+     */
+    public function editPokemon(array $dataPokemon): bool
+    {
+        $res = false;
+
+        if($dataPokemon["typeTwo"] === $dataPokemon["typeOne"]) $dataPokemon["typeTwo"] = null;
+
+        $sql = "UPDATE pokemon SET nomEspece = ?, description = ?, typeOne = ?, typeTwo = ?, urlImg = ? WHERE idPokemon = ?;";
+        if($this->execRequest($sql, [
+            $dataPokemon["nomEspece"],
+            $dataPokemon["description"],
+            $dataPokemon["typeOne"],
+            $dataPokemon["typeTwo"] === "null" ? null : $dataPokemon["typeTwo"],
+            $dataPokemon["urlImg"],
+            $dataPokemon["idPokemon"]
+        ])) $res = true;
+
+        // retourne le pokémon modifié à l'instant
+        return $res;
     }
 
     public function getById(int $idPokemon) : ?Pokemon

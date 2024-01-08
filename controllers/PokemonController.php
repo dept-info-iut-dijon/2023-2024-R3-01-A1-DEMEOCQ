@@ -45,7 +45,7 @@ class PokemonController
             $indexView->generer(["pokemons" => $pokemons, "msgType" => "success", "message" => "Le pokémon {$pokemon->getNomEspece()} a bien été ajouté"]);
         }
         else {
-            $this->displayAddPokemon(["message" => "Le pokémon n'a pas pu être ajouté"]);
+            $this->displayAddPokemon("Le pokémon n'a pas pu être ajouté");
         }
     }
 
@@ -101,5 +101,23 @@ class PokemonController
         // affiche l'index avec le message
         $delPokemonView = new View('Index');
         $delPokemonView->generer(["pokemons" => $pokemons, "msgType" => $msgType, "message" => $message]);
+    }
+
+    public function editPokemonAndIndex(array $dataPokemon): void
+    {
+        $manager = new PokemonManager();
+
+        $pokemon = $manager->getById($dataPokemon['idPokemon']);
+
+        if($pokemon !== null) {
+            $manager->editPokemon($dataPokemon);
+
+            $pokemons = $manager->getAll();
+
+            $indexView = new View('Index');
+            $indexView->generer(['pokemons' => $pokemons, "msgType" => "success", "message"=> "Le pokémon {$pokemon->getNomEspece()} a été mis à jour"]);
+        }
+        else
+            $this->displayAddPokemon("Le pokémon n'a pas pu être modifié");
     }
 }
